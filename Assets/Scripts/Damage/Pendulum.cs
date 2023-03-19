@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class Pendulum : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    [SerializeField]
+    [Header("プレイヤーに与えるダメージ量")]
+    private int _damage;
+    
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.TryGetComponent(out IDamage damage))
+        if (other.TryGetComponent(out IDamage damage))
         {
-            damage.DamagePlayer(10);
+            damage.DamagePlayer(_damage);
         }
     }
 }
